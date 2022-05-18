@@ -38,4 +38,17 @@ public class Main {
         return player;
     }
 
+    public static int getRow() {
+        int row = 0;
+        return row;
+    }
+    
+    public static int getColumn() {
+        int column = 0;
+        return column;
+    }
+
+    public Scanner getScanner() {
+        return scanner;
+    }
 }

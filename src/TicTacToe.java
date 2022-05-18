@@ -28,19 +28,19 @@ public class TicTacToe {
      * print the gameBoard
      */
     public String printBord() {
-        String strBord = "";
+        StringBuilder strBord = new StringBuilder();
         for (int i = 0; i < ROWS; i++) {
             for (int j = 0; j < COLUMNS; j++) {
                 if (j != COLUMNS -1){
-                    strBord += board[i][j] + "|";
+                    strBord.append(board[i][j]).append("|");
                 } else {
-                    strBord += board[i][j];
+                    strBord.append(board[i][j]);
                 }
             }
             if (i != COLUMNS - 1) {
-               strBord += "\n---+---+---\n";
+               strBord.append("\n---+---+---\n");
             }
         }
-        return strBord;
+        return strBord.toString();
     }
 }
