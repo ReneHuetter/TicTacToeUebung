@@ -5,9 +5,9 @@ public class TicTacToe {
      * 2 Dimensionales String-Array
      * 2 Konstante für Zeilen und Spalten
      */
-    public String[][] board;
-    public final int ROWS = 3;
-    public final int COLUMNS = 3;
+    public static String[][] board;
+    public static final int ROWS = 3;
+    public static final int COLUMNS = 3;
 
     /**
      * Konstruktor
@@ -42,5 +42,9 @@ public class TicTacToe {
             }
         }
         return strBord.toString();
+    }
+
+    public static String setPlay(int i, int j, String player) {
+        return null;
     }
 }

@@ -7,7 +7,7 @@ import java.util.*;
 
 public class Main {
 
-    Scanner scanner = new Scanner(System.in);
+    static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args){
 
@@ -38,17 +38,38 @@ public class Main {
         return player;
     }
 
-    public static int getRow() {
-        int row = 0;
-        return row;
+    public static int getRow(int input) {
+        int row = getInput();
+        try {
+            if (input >= TicTacToe.ROWS-1){
+                return row;
+            }
+        }catch (IndexOutOfBoundsException e){
+            System.out.println("Fehler bei der Eingabe");
+        }
+        return -1;
     }
     
-    public static int getColumn() {
-        int column = 0;
-        return column;
+    public static int getColumn(int input) {
+        int column = getInput();
+        try {
+            if (input >= TicTacToe.COLUMNS - 1) {
+                return column;
+            }
+        }catch (IndexOutOfBoundsException e){
+            System.out.println("Fehler bei der Eingabe");
+        }
+        return -1;
     }
 
-    public Scanner getScanner() {
-        return scanner;
+    public static int getInput() {
+        String inputstr = scanner.nextLine();
+        int input = 0;
+        try {
+            input = Integer.parseInt(inputstr);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Fehler bei der Eingabe");
+        }
+        return input;
     }
 }
