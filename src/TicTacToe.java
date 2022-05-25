@@ -1,21 +1,26 @@
 public class TicTacToe {
 
     /**
-     * Variablendeklaration
-     * 2 Dimensionales String-Array
-     * 2 Konstante für Zeilen und Spalten
+     * Klasseneigenschaften
+     * 2 dimensionales String-Array (board)
+     * 2 Konstante für Zeilen (ROWS) und Spalten (COLUMNS)
+     * Konstante String Variable (regex)
      */
     public static String[][] board;
     public static final int ROWS = 3;
     public static final int COLUMNS = 3;
+    public static final String regex = "   ";
 
     /**
-     * Konstruktor
+     * Konstruktor für das Spielfeld
      */
     public TicTacToe(){
         board = new String[ROWS][COLUMNS];
     }
 
+    /**
+     * Methode initBoard initialisiert das Spielfeld mit den vorgegebenen Standardwerte.
+     */
     public void initBoard(){
         for (int i = 0; i < ROWS; i++) {
             for (int j = 0; j < COLUMNS; j++) {
@@ -25,26 +30,48 @@ public class TicTacToe {
     }
 
     /**
-     * print the gameBoard
+     * gameBoard gibt das Spielfeld auf der Konsole aus.
      */
     public String printBord() {
-        StringBuilder strBord = new StringBuilder();
+        String output = "";
         for (int i = 0; i < ROWS; i++) {
             for (int j = 0; j < COLUMNS; j++) {
-                if (j != COLUMNS -1){
-                    strBord.append(board[i][j]).append("|");
+                if (j != COLUMNS - 1){
+                    output += board[i][j] + "|";
                 } else {
-                    strBord.append(board[i][j]);
+                    output += board[i][j];
                 }
             }
             if (i != COLUMNS - 1) {
-               strBord.append("\n---+---+---\n");
+                output += "\n---+---+---\n";
             }
         }
-        return strBord.toString();
+        return output;
     }
 
-    public static String setPlay(int i, int j, String player) {
-        return null;
+    public static boolean setPlay(int i, int j, String player) {
+        if(board[i][j].equals(regex)) {
+            board[i][j] = " " + player + " ";
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean isGameOver() {
+       for (int i = 0; i < ROWS; i++) {
+           if (!board[i][0].equals(regex) && board[i][1].equals(board[i][0]) && board[i][2].equals(board[i][1]))
+               return true;
+       }
+       for (int j = 0; j < COLUMNS; j++) {
+           if (!board[0][j].equals(regex) && board[1][j].equals(board[0][j]) && board[2][j].equals(board[1][j]))
+                   return true;
+       }
+       if (!board[2][2].equals(regex) && board[2][2].equals(board[1][1]) && board[1][1].equals(board[0][0])){
+           return true;
+       }
+       if (!board[0][2].equals(regex) && board[0][2].equals(board[1][1]) && board[1][1].equals(board[2][0])){
+           return true;
+       }
+        return false;
     }
 }

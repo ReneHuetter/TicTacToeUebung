@@ -8,27 +8,45 @@ import java.util.*;
 public class Main {
 
     static Scanner scanner = new Scanner(System.in);
+    static TicTacToe game = new TicTacToe();
 
     public static void main(String[] args){
 
-        String player = "";
-        player = getPlayer(player);
+        System.out.println("Willkommen beim Tic Tac Toe\n");
 
-        System.out.println("Willkommen beim Tic Tac Toe");
+        String player = " O ";
 
-        TicTacToe game = new TicTacToe();
         game.initBoard();
+
+        int count = 0;
         System.out.println(game.printBord());
 
-        System.out.println("Spieler " + player + " ist an der Reihe.");
+        while(true)
+        {
+            int i = getRow();
+            int j = getColum();
+            player = getPlayer(player);
 
+            while(!game.setPlay(i, j, player)){
+                System.out.println("Fehler xxx");
+
+            }
+            System.out.println(game.printBord());
+
+            count++;
+
+            if (game.isGameOver()){
+                System.out.println(game.printBord() + "\n" + player + " wins!");
+                break;
+            }
+            if(count >= 9){
+                System.out.println("UNENTSCHIEDEN");
+            }
+
+        }
     }
 
-    /**
-     *
-     * @param player
-     * @return
-     */
+
     public static String getPlayer(String player) {
         if (player.equals("X")){
             player = "O";
@@ -38,26 +56,28 @@ public class Main {
         return player;
     }
 
-    public static int getRow(int input) {
+    public static int getRow() {
+        System.out.println("Geben Sie die Reihe an: ");
         int row = getInput();
         try {
-            if (input >= TicTacToe.ROWS-1){
+            if (row <= TicTacToe.ROWS -1) {
                 return row;
             }
-        }catch (IndexOutOfBoundsException e){
-            System.out.println("Fehler bei der Eingabe");
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Zahl außerhalb der Range of indexes");
         }
         return -1;
     }
     
-    public static int getColumn(int input) {
+    public static int getColum() {
+        System.out.println("Geben Sie die Spalte an. ");
         int column = getInput();
         try {
-            if (input >= TicTacToe.COLUMNS - 1) {
+            if (column <= TicTacToe.COLUMNS -1) {
                 return column;
             }
-        }catch (IndexOutOfBoundsException e){
-            System.out.println("Fehler bei der Eingabe");
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Zahl außerhalb der Range of indexes");
         }
         return -1;
     }
@@ -67,8 +87,8 @@ public class Main {
         int input = 0;
         try {
             input = Integer.parseInt(inputstr);
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println("Fehler bei der Eingabe");
+        } catch (NumberFormatException nfe) {
+            System.out.println("Es können nur Zahlen eingegeben werden!");
         }
         return input;
     }
