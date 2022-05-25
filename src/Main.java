@@ -27,26 +27,31 @@ public class Main {
             int j = getColum();
             player = getPlayer(player);
 
-            while(!game.setPlay(i, j, player)){
+            while(!TicTacToe.setPlay(i, j, player)){
                 System.out.println("Fehler xxx");
-
+                break;
             }
             System.out.println(game.printBord());
 
             count++;
 
-            if (game.isGameOver()){
-                System.out.println(game.printBord() + "\n" + player + " wins!");
+            if (TicTacToe.isGameOver()){
+                System.out.println("\n" + game.printBord() + "\n" + player + " wins!");
                 break;
             }
             if(count >= 9){
-                System.out.println("UNENTSCHIEDEN");
+                System.out.println("UNENTSCHIEDEN\n");
             }
 
         }
     }
 
 
+    /**
+     *
+     * @param player O / X
+     * @return player
+     */
     public static String getPlayer(String player) {
         if (player.equals("X")){
             player = "O";
@@ -56,6 +61,10 @@ public class Main {
         return player;
     }
 
+    /**
+     *
+     * @return row / -1
+     */
     public static int getRow() {
         System.out.println("Geben Sie die Reihe an: ");
         int row = getInput();
@@ -68,7 +77,11 @@ public class Main {
         }
         return -1;
     }
-    
+
+    /**
+     * gibt die Spalte
+     * @return column / -1
+     */
     public static int getColum() {
         System.out.println("Geben Sie die Spalte an. ");
         int column = getInput();
@@ -82,6 +95,10 @@ public class Main {
         return -1;
     }
 
+    /**
+     * parst einen String zu einem int
+     * @return input
+     */
     public static int getInput() {
         String inputstr = scanner.nextLine();
         int input = 0;

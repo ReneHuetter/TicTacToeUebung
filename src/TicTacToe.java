@@ -49,6 +49,13 @@ public class TicTacToe {
         return output;
     }
 
+    /**
+     * Ist zum Setzen vom Spieler sein Zeichen
+     * @param i ist für Rows.
+     * @param j ist für Columns.
+     * @param player ist für den Spieler X / O.
+     * @return true / false
+     */
     public static boolean setPlay(int i, int j, String player) {
         if(board[i][j].equals(regex)) {
             board[i][j] = " " + player + " ";
@@ -57,6 +64,10 @@ public class TicTacToe {
         return false;
     }
 
+    /**
+     * überprüft, ob drei gleich in einer Reihe oder in einer Spalte sind oder diagonal sind.
+     * @return true / false
+     */
     public static boolean isGameOver() {
        for (int i = 0; i < ROWS; i++) {
            if (!board[i][0].equals(regex) && board[i][1].equals(board[i][0]) && board[i][2].equals(board[i][1]))
