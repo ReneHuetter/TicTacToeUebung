@@ -7,48 +7,86 @@ import java.util.*;
 
 public class Main {
 
+    /***
+     * Die Klassenobjekte
+     * scanner und game
+     * wobei game aus der Klasse TicTacToe kommt.
+     */
     static Scanner scanner = new Scanner(System.in);
     static TicTacToe game = new TicTacToe();
+    static boolean playgame = true;
+    static int drawcount = 0;
+    static int Xwinercount = 0;
+    static int Owinercount = 0;
 
+    /***
+     * main methode wo player auf "O" gesetzt wird.
+     * das Spielfeld ausgeben wird.
+     * wo die Zähler variable auf 0 gelegt wird.
+     */
     public static void main(String[] args){
 
         System.out.println("Willkommen beim Tic Tac Toe\n");
 
-        String player = " O ";
-
-        game.initBoard();
 
         int count = 0;
-        System.out.println(game.printBord());
 
-        while(true)
-        {
-            int i = getRow();
-            int j = getColum();
-            player = getPlayer(player);
 
-            while(!TicTacToe.setPlay(i, j, player)){
-                System.out.println("Fehler xxx");
-                break;
-            }
+
+        while (playgame) {
+            String player = " O ";
+            game.initBoard();
             System.out.println(game.printBord());
 
-            count++;
+            while (true) {
+                int i = getRow();
+                int j = getColum();
+                player = getPlayer(player);
 
-            if (TicTacToe.isGameOver()){
-                System.out.println("\n" + game.printBord() + "\n" + player + " wins!");
-                break;
-            }
-            if(count >= 9){
-                System.out.println("UNENTSCHIEDEN\n");
-            }
+                while (!TicTacToe.setPlay(i, j, player)) {
+                    System.out.println("Fehler xxx");
+                    break;
+                }
+                System.out.println(game.printBord());
 
+                count++;
+
+                if (TicTacToe.isGameOver()) {
+                    System.out.println("\n" + game.printBord() + "\n" + player + " wins!");
+                    if (player.equals("X")) {
+                        Xwinercount++;
+                        replaygame();
+                    } else {
+                        Owinercount++;
+                        replaygame();
+                    }
+                    break;
+                }
+                if (count >= 9) {
+                    System.out.println("UNENTSCHIEDEN\n" + "Es wurde so oft ein UNENTSCHIEDEN erspielt" + drawcount);
+                    drawcount++;
+                    playgame = false;
+                }
+
+            }
         }
+
+    }
+
+    private static void replaygame() {
+        System.out.println("wollen sie noch mal spielen ?\n 1 für JA\n 2 für NEIN");
+        int choose = getInput();
+        System.out.println(
+                "Spieler: X hat so oft gewonnen: " + Xwinercount + "\n" +
+                "Spieler: O hat so oft gewonnen: " + Owinercount + "\n" +
+                "Es wurde so oft ein UNENTSCHIEDEN erspielt" + drawcount + "\n"
+        );
+        playgame = choose == 1;
     }
 
 
     /**
-     *
+     * Wechselt den Spieler von "O" auf "X" und zurück von "X" auf "O".
      * @param player O / X
      * @return player
      */
@@ -62,7 +100,7 @@ public class Main {
     }
 
     /**
-     *
+     * gibt die Reihe zurück wo der aktive Spieler sein Zeichen setzt.
      * @return row / -1
      */
     public static int getRow() {
@@ -79,7 +117,7 @@ public class Main {
     }
 
     /**
-     * gibt die Spalte
+     * gibt die Spalte zurück wo der aktive Spieler sein Zeichen setzt.
      * @return column / -1
      */
     public static int getColum() {
