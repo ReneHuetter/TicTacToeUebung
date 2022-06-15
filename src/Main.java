@@ -28,10 +28,7 @@ public class Main {
 
         System.out.println("Willkommen beim Tic Tac Toe\n");
 
-
         int count = 0;
-
-
 
         while (playgame) {
             String player = " O ";
@@ -73,6 +70,9 @@ public class Main {
 
     }
 
+    /**
+     *
+     */
     private static void replaygame() {
         System.out.println("wollen sie noch mal spielen ?\n 1 für JA\n 2 für NEIN");
         int choose = getInput();
